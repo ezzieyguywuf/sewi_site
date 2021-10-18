@@ -19,6 +19,13 @@ li a {
 }
 
 li a:hover {
+  background-color: #555;
+}
+
+.active {
   background-color: #b94a4f;
 }
 
+.right {
+  float: right;
+}
