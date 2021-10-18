@@ -10,9 +10,9 @@ function Navlink(props: LinkProps) {
   const className = `navitem ${props.right ? 'rightalign' : ''}`;
 
   return (
-    <div className={className}>
+    <li className={className}>
       <a href={props.target}>{props.text}</a>
-    </div>
+    </li>
   );
 }
 

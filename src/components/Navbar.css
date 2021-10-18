@@ -35,3 +35,9 @@ img {
   width: auto;
   padding: 0px 16px;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
