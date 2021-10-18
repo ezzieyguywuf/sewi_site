@@ -5,6 +5,9 @@ ul {
   overflow: hidden;
   background-color: #6b716f;
   border: 1px solid #b94a4f;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 }
 
 li {
