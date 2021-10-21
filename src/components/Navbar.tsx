@@ -4,15 +4,23 @@ import logo from '../res/sewi_logo.png';
 import Navlink from './Navlink';
 
 function Navbar() {
+  const navlinkdata = [
+    {target: '#!', text:'Home'},
+    {target: '#!', text:'Premium'},
+    {target: '#!', text:'Catalog'},
+    {target: '#!', text:'Contact', right:true},
+  ];
+
+  const navlinks = navlinkdata.map((data, index) =>
+    <Navlink key={index} {...data} />
+  )
+
   return (
     <div className="navbar">
         <img className="navitem" src={logo} alt="logo" />
-        <ul>
-          <Navlink key="0" target="#!" text="Home" />
-          <Navlink key="1" target="#!" text="Premium" />
-          <Navlink key="2" target="#!" text="Catalog" />
-          <Navlink key="3" target="#!" text="Contact" right={true} />
-        </ul>
+        {navlinks}
+        <label htmlFor="hamburger" className="hamburger">&#9776;</label>
+        <input type="checkbox" id="hamburger" className="hamburger"/>
     </div>
   );
 }

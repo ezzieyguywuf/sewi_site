@@ -1,5 +1,6 @@
 .navbar {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   background-color: #ddd;
   border: 1px solid #b94a4f;
@@ -33,11 +34,27 @@
 img {
   height: 30px;
   width: auto;
-  padding: 0px 16px;
+  padding: 12px 16px;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+/* @media screen and (max-width: 1500px) { */
+/*   .navitem a{ */
+/*     box-sizing: border-box; */
+/*     display: none; */
+/*     width: 100%; */
+/*   } */
+
+/*   label.hamburger { */
+/*     display: inline-block; */
+/*   } */
+/* } */
+
+.hamburger {
+  user-select: none;
+  padding: 12px 16px;
+  display: none;
+}
+
+input.hamburger {
+  display: none;
 }
