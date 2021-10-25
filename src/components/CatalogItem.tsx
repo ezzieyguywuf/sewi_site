@@ -1,17 +1,25 @@
 import React from 'react';
 import './CatalogItem.css'
 
-interface CatalogProps {
-    img_path: string,
-    img_alt: string
+export interface TechnicalInformation {
+  name: string,
+  value: string,
 }
 
-function CatalogItem(props: CatalogProps) {
+export interface CatalogProps {
+    product_code: string,
+    price: number,
+    img_path: string,
+    img_alt: string,
+    brief: string,
+    detailed: string | undefined,
+    tech: TechnicalInformation[],
+}
+
+export function CatalogItem(props: CatalogProps) {
   return (
     <div className="catalog-item">
       <img src={props.img_path} alt={props.img_alt}></img>
     </div>
   );
 }
-
-export default CatalogItem;
