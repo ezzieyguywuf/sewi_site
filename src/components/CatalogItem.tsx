@@ -1,12 +1,15 @@
 import React from 'react';
-import ac from '../res/PAC1803711_air_conditioner.png'
 import './CatalogItem.css'
 
+interface CatalogProps {
+    img_path: string,
+    img_alt: string
+}
 
-function CatalogItem() {
+function CatalogItem(props: CatalogProps) {
   return (
     <div className="catalog-item">
-      <img src={ac} alt="air conditioner"></img>
+      <img src={props.img_path} alt={props.img_alt}></img>
     </div>
   );
 }
