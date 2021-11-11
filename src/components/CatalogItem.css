@@ -1,5 +1,26 @@
+.catalog-item {
+  display: flex;
+  flex-direction: column;
+  max-width:30%;
+  border-style: solid;
+  border-width: 3px;
+  /* background: #f0f0f0; */
+  align-items: center;
+  margin: 20px;
+}
+
+.catalog-subitem {
+  padding: 6px;
+}
+
 .catalog-item img {
     min-width: 200px;
-    max-width:100%;
+    max-width: 30%;
     height: auto;
+}
+
+.catalog-table table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
 }
