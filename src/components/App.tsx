@@ -1,41 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './Navbar'
 import {CatalogItem, CatalogProps} from './CatalogItem'
 import ac from '../res/PAC1803711_air_conditioner.png'
 
+type ApiItem = {
+  detailed: string,
+  brief: string,
+  price: number,
+  product_code: string
+  tech: any
+}
+type ApiResponse = {
+  Count: number,
+  Items: ApiItem[],
+  ResponseMetadata: any,
+}
+
 function App() {
-  const catalogItemProps : CatalogProps= {
-    product_code: "PAC1803711",
-    price: 413.40,
-    img_path: ac,
-    img_alt: "Air Conditional",
-    brief: "AIRE ACONDICIONADO SPLIT DE ALTA EFICIENCIA",
-    detailed: "INCLUYE 3M DE TUBO DE COBRE Y CABLES DE CONEXIÓN",
-    tech: [
-      {
-        name: "BTU",
-        value: "18.000",
-      },
-      {
-        name: "Poder",
-        value: "220V / 60HZ",
-      },
-      {
-        name: "Efficiencia",
-        value: "10.5 SEER - 14 SEER",
-      },
-      {
-        name: "REFRIGERANTE",
-        value: "R-410ª",
-      }
-    ]
-  };
+  const [catalogItems, setCatalogItems] = useState([]);
+
+  useEffect(() => {
+
+    fetch('https://rznkssur86.execute-api.us-east-1.amazonaws.com/test/getitems')
+      .then(response => response.json())
+      .then((data: ApiResponse) => {
+        let items = [] as any;
+        for(const item of data.Items) {
+          const catalogItem : CatalogProps = {
+            ...item,
+            img_path: ac,
+            img_alt: "Aire Conditional"
+          }
+          items.push(CatalogItem(catalogItem));
+        }
+
+        setCatalogItems(items)
+      })
+  }, []);
+
 
   return (
     <div className="App">
       <Navbar />
-      <CatalogItem {...catalogItemProps}/>
+      {catalogItems}
     </div>
   );
 }
