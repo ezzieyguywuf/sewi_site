@@ -2,18 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './Navbar'
 import {CatalogItem, CatalogProps} from './CatalogItem'
-import ac from '../res/PAC1803711_air_conditioner.png'
 
-type ApiItem = {
-  detailed: string,
-  brief: string,
-  price: number,
-  product_code: string
-  tech: any
-}
 type ApiResponse = {
   Count: number,
-  Items: ApiItem[],
+  Items: CatalogProps[],
   ResponseMetadata: any,
 }
 
@@ -27,11 +19,7 @@ function App() {
       .then((data: ApiResponse) => {
         let items = [] as any;
         for(const item of data.Items) {
-          const catalogItem : CatalogProps = {
-            ...item,
-            img_path: ac,
-            img_alt: "Aire Conditional"
-          }
+          const catalogItem : CatalogProps = {...item}
           items.push(CatalogItem(catalogItem));
         }
 
