@@ -3,14 +3,11 @@ import React from 'react';
 interface LinkProps {
   target: string;
   text: string;
-  right?: boolean;
 }
 
 function Navlink(props: LinkProps) {
-  const className = `navitem ${props.right ? 'rightalign' : ''}`;
-
   return (
-    <div className={className}>
+    <div className="navitem">
       <a href={props.target}>{props.text}</a>
     </div>
   );

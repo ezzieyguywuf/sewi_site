@@ -23,8 +23,8 @@
   padding: 14px 16px;
 }
 
-.rightalign {
-  margin-left: auto;
+.filler {
+  flex-grow: 1;
 }
 
 .active {

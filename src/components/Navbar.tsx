@@ -8,11 +8,18 @@ function Navbar() {
     {target: '#!', text:'Home'},
     {target: '#!', text:'Premium'},
     {target: '#!', text:'Catalog'},
-    {target: '#!', text:'Contact', right:true},
+    undefined, // this will separate the "left" from the "right" data
+    {target: '#!', text:'Contact'},
+    {target: '#!', text:'Login'},
   ];
 
-  const navlinks = navlinkdata.map((data, index) =>
-    <Navlink key={index} {...data} />
+  const navlinks = navlinkdata.map((data, index) => {
+      if (data === undefined) {
+        return <div className="filler"></div>
+      } else {
+        return <Navlink key={index} {...data} />
+      }
+  }
   )
 
   return (
