@@ -1,37 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Navbar from './Navbar'
-import {CatalogItem, CatalogProps} from './CatalogItem'
-
-type ApiResponse = {
-  Count: number,
-  Items: CatalogProps[],
-  ResponseMetadata: any,
-}
+import Home from './Home'
+import Catalog from './Catalog'
 
 function App() {
-  const [catalogItems, setCatalogItems] = useState([]);
-
-  useEffect(() => {
-
-    fetch('https://rznkssur86.execute-api.us-east-1.amazonaws.com/test/getitems')
-      .then(response => response.json())
-      .then((data: ApiResponse) => {
-        let items = [] as any;
-        for(const item of data.Items) {
-          const catalogItem : CatalogProps = {...item}
-          items.push(CatalogItem(catalogItem));
-        }
-
-        setCatalogItems(items)
-      })
-  }, []);
-
 
   return (
     <div className="App">
       <Navbar />
-      {catalogItems}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+      </Routes>
     </div>
   );
 }

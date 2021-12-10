@@ -5,9 +5,9 @@ import Navlink from './Navlink';
 
 function Navbar() {
   const navlinkdata = [
-    {target: '#!', text:'Home'},
+    {target: '/', text:'Home'},
     {target: '#!', text:'Premium'},
-    {target: '#!', text:'Catalog'},
+    {target: '/catalog', text:'Catalog'},
     undefined, // this will separate the "left" from the "right" data
     {target: '#!', text:'Contact'},
     {target: '#!', text:'Login'},

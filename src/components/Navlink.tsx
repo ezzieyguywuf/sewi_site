@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from 'react';
 
 interface LinkProps {
@@ -8,7 +9,7 @@ interface LinkProps {
 function Navlink(props: LinkProps) {
   return (
     <div className="navitem">
-      <a href={props.target}>{props.text}</a>
+      <Link to={props.target}>{props.text}</Link>
     </div>
   );
 }
