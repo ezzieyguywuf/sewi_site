@@ -9,11 +9,13 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalog" element={<Catalog />} />
-      </Routes>
+      <div className="App-column">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+        </Routes>
+      </div>
     </div>
   );
 }
