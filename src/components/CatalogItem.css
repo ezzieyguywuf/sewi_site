@@ -1,6 +1,7 @@
 .catalog-item {
   display: flex;
   flex-direction: column;
+  min-width: 300px;
   max-width:30%;
   border-style: solid;
   border-width: 3px;
