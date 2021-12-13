@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {CatalogItem, CatalogProps} from './CatalogItem'
+import './Catalog.css'
 
 type ApiResponse = {
   Count: number,
@@ -25,7 +26,7 @@ function Catalog() {
       })
   }, []);
 
-  return (<div>{catalogItems}</div>);
+  return (<div className="catalog">{catalogItems}</div>);
 }
 
 export default Catalog;

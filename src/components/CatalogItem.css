@@ -12,6 +12,8 @@
 
 .catalog-subitem {
   padding: 6px;
+  border-style: solid;
+  border-width: 3px;
 }
 
 .catalog-item img {
