@@ -1,0 +1,21 @@
+.Login form {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+  padding: 40px;
+  flex: 1 1 auto;
+}
+
+.login-form-field {
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.login-form-submit {
+  padding: 7px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  background-color: #3a3a3a;
+}

@@ -10,7 +10,7 @@ function Navbar() {
     {target: '/catalog', text:'Catalog'},
     undefined, // this will separate the "left" from the "right" data
     {target: '#!', text:'Contact'},
-    {target: '#!', text:'Login'},
+    {target: '/login', text:'Login'},
   ];
 
   const navlinks = navlinkdata.map((data, index) => {
