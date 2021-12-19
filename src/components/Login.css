@@ -1,20 +1,23 @@
-.Login form {
+.login {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   margin: 40px;
-  padding: 40px;
   flex: 1 1 auto;
+  width: 50%;
 }
 
-.login-form-field {
-  height: 40px;
+.login-item.login-error {
+  height: auto;
+}
+
+.login-item {
+  height: 50px;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
-.login-form-submit {
-  padding: 7px;
-  border-radius: 5px;
+.login-item.login-form-submit {
   color: white;
   font-weight: bold;
   background-color: #3a3a3a;

@@ -13,14 +13,35 @@ function Login() {
     event.preventDefault();
   }
 
+  function generateErrorText() {
+    if (email === "" && password !== "") {
+      return "Please enter an email address";
+    } else if (email !== "" && password === "") {
+      return "Please enter a password";
+    } else if (email === "" && password === "") {
+      return "Please enter a username and a password";
+    } else {
+      // return `email: ${email}, password: ${password}`;
+    }
+  }
+
   return (
-    <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username" className="login-form-field" placeholder="Username" />
-        <input type="password" name="password" className="login-form-field" placeholder="Password" />
-        <input type="submit" value="Login" className="login-form-submit" />
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="login">
+      <input type="text" className="login-item"
+        autoFocus
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Username"
+      />
+      <input type="password" className="login-item"
+        autoFocus
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <input type="submit" value="Login" className="login-item login-form-submit" />
+      <div className="login-item login-error">
+        {generateErrorText()}
+      </div>
+    </form>
   );
 }
 
