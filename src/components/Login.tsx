@@ -1,22 +1,20 @@
-import { Authenticator } from "@aws-amplify/ui-react";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import '@aws-amplify/ui-react/styles.css';
 import "./Login.css";
+import CatalogEditor from './CatalogEditor';
 
 
-function Login() {
+// @ts-ignore
+function Login({ signOut, user }) {
+  const groups = user.signInUserSession.accessToken.payload["cognito:groups"];
+  const isAdmin = groups ? groups.includes("admin") : false;
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        <main>
-          {/*
-            // @ts-ignore */}
-          <h1>Hello {user.attributes.email}. You are in group {user.signInUserSession.accessToken.payload["cognito:groups"]}</h1>
-          {console.log(`${JSON.stringify(user, null, 2)}`)}
-          <button onClick={signOut}>Sign out</button>
-        </main>
-      )}
-    </Authenticator>
+    <>
+      <h1>Hello {user.attributes.email}.</h1>
+      {isAdmin && <CatalogEditor />}
+      <button onClick={signOut}>Sign out</button>
+    </>
   );
 }
 
-export default Login;
+export default withAuthenticator(Login);
