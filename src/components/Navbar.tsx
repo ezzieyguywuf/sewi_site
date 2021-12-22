@@ -15,9 +15,9 @@ function Navbar() {
 
   const navlinks = navlinkdata.map((data, index) => {
       if (data === undefined) {
-        return <div className="filler"></div>
+        return <div key={index} className="filler"></div>
       } else {
-        return <Navlink key={index} {...data} />
+        return <div key={index}><Navlink {...data} /> </div>
       }
   }
   )
