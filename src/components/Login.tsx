@@ -10,7 +10,7 @@ function Login({ signOut, user }) {
   const isAdmin = groups ? groups.includes("admin") : false;
   return (
     <>
-      <h1>Hello {user.attributes.email}.</h1>
+      <h1>Hello {user.username}.</h1>
       {isAdmin && <CatalogEditor />}
       <button onClick={signOut}>Sign out</button>
     </>
