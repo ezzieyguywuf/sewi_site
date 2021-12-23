@@ -1,0 +1,23 @@
+.catalog-editor-table, .catalog-editor-row {
+  border-style: solid;
+}
+
+.catalog-editor-table {
+  border-width: 2px 0px 0px 2px;
+  width: 70%;
+}
+
+.catalog-editor-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.catalog-editor-item {
+  width: 100%;
+}
+
+.catalog-editor-table > .catalog-editor-row {
+  border-width: 0px 2px 2px 0px;
+}

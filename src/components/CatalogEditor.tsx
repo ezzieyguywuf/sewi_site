@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ApiResponse } from "./Catalog";
-import { CatalogProps } from "./CatalogItem";
+import { CatalogEditorProps } from "./CatalogEditorItem";
 import CatalogEditorItem from "./CatalogEditorItem";
+import "./CatalogEditor.css";
 
 function CatalogEditor() {
   const [catalogItems, setCatalogItems] = useState([]);
@@ -14,8 +15,8 @@ function CatalogEditor() {
         let items = [] as any;
         let key = 0;
         for(const item of data.Items) {
-          const props : CatalogProps = {...item}
-          items.push(<div key={key}><CatalogEditorItem {...props} /></div>);
+          const props : CatalogEditorProps = {id: key, ...item};
+          items.push(<CatalogEditorItem {...props} />);
           key += 1;
         }
 
@@ -23,10 +24,11 @@ function CatalogEditor() {
       })
   }, []);
   return (
-    <>
-      <h1>Hello. This is the catalog editor</h1>
-      {catalogItems}
-    </>
+    <div className="App-column">
+      <div className="catalog-editor-table">
+        {catalogItems}
+      </div>
+    </div>
   );
 }
 
