@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {CatalogItem, CatalogProps} from './CatalogItem'
 import './Catalog.css'
 
-type ApiResponse = {
+export type ApiResponse = {
   Count: number,
   Items: CatalogProps[],
   ResponseMetadata: any,
