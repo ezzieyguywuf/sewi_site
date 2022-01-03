@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { ApiResponse } from "./Catalog";
-import { CatalogEditorProps } from "./CatalogEditorItem";
 import CatalogEditorItem from "./CatalogEditorItem";
 import "./CatalogEditor.css";
 
@@ -15,8 +14,7 @@ function CatalogEditor() {
         let items = [] as any;
         let key = 0;
         for(const item of data.Items) {
-          const props : CatalogEditorProps = {id: key, ...item};
-          items.push(<CatalogEditorItem {...props} />);
+          items.push(<CatalogEditorItem {...item} key={key} />);
           key += 1;
         }
 
