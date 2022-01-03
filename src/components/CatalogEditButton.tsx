@@ -1,10 +1,12 @@
 import { CatalogProps } from "./CatalogItem";
 
-export function CatalogEditButton(props: CatalogProps) {
-  const edit = () => {
-    console.log("edit requested");
-  }
+export interface CatalogEditButtonProps {
+    clicked: (props: CatalogProps) => void,
+    props: CatalogProps,
+}
+
+export function CatalogEditButton(props: CatalogEditButtonProps) {
   return (
-    <button className="catalog-edit-button" onClick={edit}>edit</button>
+    <button className="catalog-edit-button" onClick={() => props.clicked(props.props) }>edit</button>
   );
 }
