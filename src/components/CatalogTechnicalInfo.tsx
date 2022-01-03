@@ -10,8 +10,8 @@ interface TechnicalData {
 }
 
 export function CatalogTechnicalInfo(props: TechnicalData) {
-  const tableRows = props.data.map(({name, value}) => (
-    <tr>
+  const tableRows = props.data.map(({name, value}, id) => (
+    <tr key={id}>
       <td>{name}</td>
       <td>{value}</td>
     </tr>

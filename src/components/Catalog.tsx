@@ -17,9 +17,11 @@ function Catalog() {
       .then(response => response.json())
       .then((data: ApiResponse) => {
         let items = [] as any;
+        let key = 0;
         for(const item of data.Items) {
           const catalogItem : CatalogProps = {...item}
-          items.push(CatalogItem(catalogItem));
+          items.push(<CatalogItem {...catalogItem} key={key} />);
+          key += 1;
         }
 
         setCatalogItems(items)
