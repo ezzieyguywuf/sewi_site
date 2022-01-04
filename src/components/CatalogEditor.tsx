@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { ApiResponse } from "./Catalog";
 import { CatalogProps } from "./CatalogItem";
 import { CatalogEditButtonProps } from "./CatalogEditButton";
-import { ItemEditor } from "./ItemEditor";
+import { ItemEditor, ItemEditorProps } from "./ItemEditor";
 import CatalogEditorItem from "./CatalogEditorItem";
 import "./CatalogEditor.css";
 
 function CatalogEditor() {
   const [showModal, setShowModal] = useState(false);
   const [catalogItems, setCatalogItems] = useState([]);
-  const [cachedProps, setCachedProps] = useState<CatalogProps>({
+  const [cachedProps, setCachedProps] = useState<ItemEditorProps>({
     product_code: "",
     price: 0,
     img_path: "",
@@ -17,10 +17,11 @@ function CatalogEditor() {
     brief: "",
     detailed: undefined,
     tech: [],
+    setModalState: setShowModal,
   });
 
   const edit = (props: CatalogProps) => {
-    setCachedProps(props);
+    setCachedProps({...props, setModalState: setShowModal});
     setShowModal(true);
     console.log(`edit requested, code = ${props.product_code}`);
   }
