@@ -45,11 +45,14 @@ function CatalogEditor() {
         setCatalogItems(items)
       })
   }, []);
+
+  const catalogTable =
+    <div className="catalog-editor-table">
+      {catalogItems}
+    </div>;
   return (
     <div className="App-column">
-      <div className="catalog-editor-table">
-        {showModal ? <ItemEditor {...cachedProps} /> : catalogItems}
-      </div>
+      {showModal ? <ItemEditor {...cachedProps} /> : catalogTable}
     </div>
   );
 }
