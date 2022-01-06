@@ -1,9 +1,9 @@
 import { CatalogProps } from "./CatalogItem";
-import { useEffect } from 'react';
+import { useEffect, SetStateAction, Dispatch } from 'react';
 import "./ItemEditor.css"
 
 export interface ItemEditorProps extends CatalogProps {
-  setModalState: (val: Boolean) => void;
+  setModalState: Dispatch<SetStateAction<boolean>>;
 }
 
 export function ItemEditor(props: ItemEditorProps) {
