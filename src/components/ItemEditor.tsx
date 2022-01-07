@@ -1,5 +1,5 @@
 import { CatalogProps } from "./CatalogItem";
-import { useEffect, SetStateAction, Dispatch } from 'react';
+import { useEffect, SetStateAction, Dispatch, SyntheticEvent } from 'react';
 import "./ItemEditor.css"
 
 export interface ItemEditorProps extends CatalogProps {
@@ -22,11 +22,24 @@ export function ItemEditor(props: ItemEditorProps) {
     }
   }, [props]);
 
+  function handleSubmit(event: SyntheticEvent) {
+    event.preventDefault();
+  }
+
   return (
-    <div className="modal" >
-      <div className="editor-modal">
-        Item Editor
-      </div>
+    <div className="modal">
+      <form onSubmit={handleSubmit} className="editor-modal">
+        <table>
+        <tr>
+          <label >Product Code
+            <input type="text" defaultValue={props.product_code} />
+          </label>
+        </tr>
+        <tr>
+          <input type="submit" value="Submit" />
+        </tr>
+        </table>
+      </form>
     </div>
-   )
+  );
 }
