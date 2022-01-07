@@ -81,13 +81,10 @@ export function ItemEditor(props: ItemEditorProps) {
         />
       </div>
       <div className="table-row">
-        <button>Change Image</button>
+        <input type="file" accept="image/*" />
       </div>
     </>;
 
-    // img_path: string,
-    // img_alt: string,
-    // tech: TechnicalInformation[],
   return (
     <div className="modal">
       <form onSubmit={handleSubmit} className="editor-modal">
