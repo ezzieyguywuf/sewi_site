@@ -11,6 +11,7 @@ export function ItemEditor(props: ItemEditorProps) {
   const [brief, setBrief] = useState(props.brief);
   const [detailed, setDetailed] = useState(props.detailed);
   const [price, setPrice] = useState(props.price);
+  const [tech, setTech] = useState(props.tech);
 
   useEffect(() => {
     const handleEscape = (event: any) => {
@@ -30,11 +31,37 @@ export function ItemEditor(props: ItemEditorProps) {
     event.preventDefault();
   }
 
-    // price: number,
+  function updateTech(name: string, value: string) {
+      const newTech = {...props.tech, name: name, value: value}
+      setTech(newTech);
+  };
+
+  const techTableRows = tech === undefined ?
+    <></> :
+    props.tech.map(({name, value}) => {
+      return (
+        <div className="table-row">
+          <label className="table-label">{name}</label>
+          <input
+            type="text"
+            className="table-input"
+            value={value}
+            onChange={(e) => updateTech(name, e.target.value)}
+          />
+        </div>
+      );
+    });
+  const techTable = tech === undefined ?
+    <></> :
+    <div className="table">
+      {techTableRows}
+      <div className="table-row">
+        <button>Add Technical Info</button>
+      </div>
+    </div>;
+
     // img_path: string,
     // img_alt: string,
-    // brief: string,
-    // detailed: string | undefined,
     // tech: TechnicalInformation[],
   return (
     <div className="modal">
@@ -78,10 +105,9 @@ export function ItemEditor(props: ItemEditorProps) {
               onChange={(e) => setPrice(parseFloat(e.target.value))}
             />
           </div>
-          <div className="table-row">
-            <input type="submit" value="Submit" />
-          </div>
         </div>
+        {techTable}
+        <button>Save</button>
       </form>
     </div>
   );
