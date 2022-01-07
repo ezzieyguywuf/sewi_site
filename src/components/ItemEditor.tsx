@@ -12,6 +12,7 @@ export function ItemEditor(props: ItemEditorProps) {
   const [detailed, setDetailed] = useState(props.detailed);
   const [price, setPrice] = useState(props.price);
   const [tech, setTech] = useState(props.tech);
+  const [img_alt, setImgAlt] = useState(props.img_alt);
 
   useEffect(() => {
     const handleEscape = (event: any) => {
@@ -59,6 +60,30 @@ export function ItemEditor(props: ItemEditorProps) {
         <button>Add Technical Info</button>
       </div>
     </div>;
+  const image = props.img_path === "" ?
+    <div>
+      <div className="table-row">
+        <button>Add Image</button>
+      </div>
+    </div> :
+    <>
+      <div className="table-row">
+        <img src={props.img_path} alt={props.img_alt}></img>
+      </div>
+      <div className="table-row">
+        <label className="table-label">Image Description</label>
+        <input
+          type="text"
+          className="table-input"
+          value={img_alt}
+          required={true}
+          onChange={(e) => setImgAlt(e.target.value)}
+        />
+      </div>
+      <div className="table-row">
+        <button>Change Image</button>
+      </div>
+    </>;
 
     // img_path: string,
     // img_alt: string,
@@ -107,6 +132,7 @@ export function ItemEditor(props: ItemEditorProps) {
           </div>
         </div>
         {techTable}
+        {image}
         <button>Save</button>
       </form>
     </div>
