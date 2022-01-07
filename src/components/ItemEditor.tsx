@@ -10,6 +10,7 @@ export function ItemEditor(props: ItemEditorProps) {
   const [product_code, setProductCode] = useState(props.product_code);
   const [brief, setBrief] = useState(props.brief);
   const [detailed, setDetailed] = useState(props.detailed);
+  const [price, setPrice] = useState(props.price);
 
   useEffect(() => {
     const handleEscape = (event: any) => {
@@ -64,6 +65,17 @@ export function ItemEditor(props: ItemEditorProps) {
               className="table-input"
               value={detailed}
               onChange={(e) => setDetailed(e.target.value)}
+            />
+          </div>
+          <div className="table-row">
+            <label className="table-label">Price</label>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              className="table-input"
+              value={price}
+              onChange={(e) => setPrice(parseFloat(e.target.value))}
             />
           </div>
           <div className="table-row">
