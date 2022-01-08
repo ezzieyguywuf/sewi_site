@@ -7,12 +7,7 @@ export interface ItemEditorProps extends CatalogProps {
 }
 
 export function ItemEditor(props: ItemEditorProps) {
-  const [product_code, setProductCode] = useState(props.product_code);
-  const [brief, setBrief] = useState(props.brief);
-  const [detailed, setDetailed] = useState(props.detailed);
-  const [price, setPrice] = useState(props.price);
-  const [tech, setTech] = useState(props.tech);
-  const [img_alt, setImgAlt] = useState(props.img_alt);
+  const [cachedProps, setCachedProps] = useState(props);
 
   useEffect(() => {
     const handleEscape = (event: any) => {
@@ -33,30 +28,30 @@ export function ItemEditor(props: ItemEditorProps) {
   }
 
   function updateTechName(oldName: string, newName: string) {
-    const newTech = tech.map(({name, value}) => {
+    const newTech = cachedProps.tech.map(({name, value}) => {
       if (name === oldName) {
         return {name: newName, value: value};
       } else {
         return {name: name, value: value};
       }
     })
-    setTech(newTech);
+    setCachedProps({...cachedProps, tech: newTech})
   };
 
   function updateTechValue(checkName: string, newValue: string) {
-    const newTech = tech.map(({name, value}) => {
+    const newTech = cachedProps.tech.map(({name, value}) => {
       if (name === checkName) {
         return {name: name, value: newValue};
       } else {
         return {name: name, value: value};
       }
     })
-    setTech(newTech);
+    setCachedProps({...cachedProps, tech: newTech});
   };
 
-  const techTableRows = tech === undefined ?
+  const techTableRows = cachedProps.tech === undefined ?
     <></> :
-    tech.map(({name, value}, idx) => {
+    cachedProps.tech.map(({name, value}, idx) => {
       return (
         <div className="table-row" key={idx}>
           <input
@@ -78,7 +73,7 @@ export function ItemEditor(props: ItemEditorProps) {
         </div>
       );
     });
-  const techTable = tech === undefined ?
+  const techTable = cachedProps.tech === undefined ?
     <></> :
     <div className="table">
       {techTableRows}
@@ -94,16 +89,16 @@ export function ItemEditor(props: ItemEditorProps) {
     </div> :
     <>
       <div className="table-row">
-        <img src={props.img_path} alt={img_alt}></img>
+        <img src={props.img_path} alt={cachedProps.img_alt}></img>
       </div>
       <div className="table-row">
         <label className="table-label">Image Description</label>
         <input
           type="text"
           className="table-input"
-          value={img_alt}
+          value={cachedProps.img_alt}
           required={true}
-          onChange={(e) => setImgAlt(e.target.value)}
+          onChange={(e) => setCachedProps({...cachedProps, img_alt: e.target.value})}
         />
       </div>
       <div className="table-row">
@@ -120,8 +115,8 @@ export function ItemEditor(props: ItemEditorProps) {
             <input
               type="text"
               className="table-input"
-              value={product_code}
-              onChange={(e) => setProductCode(e.target.value)}
+              value={cachedProps.product_code}
+              onChange={(e) => setCachedProps({...cachedProps, product_code: e.target.value})}
             />
           </div>
           <div className="table-row">
@@ -129,8 +124,8 @@ export function ItemEditor(props: ItemEditorProps) {
             <input
               type="text"
               className="table-input"
-              value={brief}
-              onChange={(e) => setBrief(e.target.value)}
+              value={cachedProps.brief}
+              onChange={(e) => setCachedProps({...cachedProps, brief: e.target.value})}
             />
           </div>
           <div className="table-row">
@@ -138,8 +133,8 @@ export function ItemEditor(props: ItemEditorProps) {
             <input
               type="text"
               className="table-input"
-              value={detailed}
-              onChange={(e) => setDetailed(e.target.value)}
+              value={cachedProps.detailed}
+              onChange={(e) => setCachedProps({...cachedProps, detailed: e.target.value})}
             />
           </div>
           <div className="table-row">
@@ -149,8 +144,8 @@ export function ItemEditor(props: ItemEditorProps) {
               min="0"
               step="0.01"
               className="table-input"
-              value={price}
-              onChange={(e) => setPrice(parseFloat(e.target.value))}
+              value={cachedProps.price}
+              onChange={(e) => setCachedProps({...cachedProps, price: parseFloat(e.target.value)})}
             />
           </div>
         </div>
