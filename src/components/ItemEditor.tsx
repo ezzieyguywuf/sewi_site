@@ -49,6 +49,11 @@ export function ItemEditor(props: ItemEditorProps) {
     setCachedProps({...cachedProps, tech: newTech});
   };
 
+  function removeTechRow(checkName: string) {
+    const newTech = cachedProps.tech.filter(info => info.name !== checkName);
+    setCachedProps({...cachedProps, tech: newTech});
+  }
+
   const techTableRows = cachedProps.tech === undefined ?
     <></> :
     cachedProps.tech.map(({name, value}, idx) => {
@@ -70,6 +75,7 @@ export function ItemEditor(props: ItemEditorProps) {
             placeholder="value"
             onChange={(e) => updateTechValue(name, e.target.value)}
           />
+          <input type="button" value="remove" onClick={(e) => removeTechRow(name)}/>
         </div>
       );
     });
