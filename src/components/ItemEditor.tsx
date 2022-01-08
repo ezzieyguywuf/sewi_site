@@ -27,9 +27,9 @@ export function ItemEditor(props: ItemEditorProps) {
     event.preventDefault();
   }
 
-  function updateTechName(oldName: string, newName: string) {
-    const newTech = cachedProps.tech.map(({name, value}) => {
-      if (name === oldName) {
+  function updateTechName(index: number, newName: string) {
+    const newTech = cachedProps.tech.map(({name, value}, idx) => {
+      if (idx === index) {
         return {name: newName, value: value};
       } else {
         return {name: name, value: value};
@@ -38,9 +38,9 @@ export function ItemEditor(props: ItemEditorProps) {
     setCachedProps({...cachedProps, tech: newTech})
   };
 
-  function updateTechValue(checkName: string, newValue: string) {
-    const newTech = cachedProps.tech.map(({name, value}) => {
-      if (name === checkName) {
+  function updateTechValue(index: number, newValue: string) {
+    const newTech = cachedProps.tech.map(({name, value}, idx) => {
+      if (idx === index) {
         return {name: name, value: newValue};
       } else {
         return {name: name, value: value};
@@ -49,8 +49,13 @@ export function ItemEditor(props: ItemEditorProps) {
     setCachedProps({...cachedProps, tech: newTech});
   };
 
-  function removeTechRow(checkName: string) {
-    const newTech = cachedProps.tech.filter(info => info.name !== checkName);
+  function addTechRow() {
+    const newTech = [...cachedProps.tech, {name: "", value: ""}];
+    setCachedProps({...cachedProps, tech: newTech});
+  }
+
+  function removeTechRow(index: number) {
+    const newTech = [...cachedProps.tech.slice(0, index), ...cachedProps.tech.slice(index+1)];
     setCachedProps({...cachedProps, tech: newTech});
   }
 
@@ -65,7 +70,7 @@ export function ItemEditor(props: ItemEditorProps) {
             value={name}
             required={true}
             placeholder="name"
-            onChange={(e) => updateTechName(name, e.target.value)}
+            onChange={(e) => updateTechName(idx, e.target.value)}
           />
           <input
             type="text"
@@ -73,9 +78,9 @@ export function ItemEditor(props: ItemEditorProps) {
             value={value}
             required={true}
             placeholder="value"
-            onChange={(e) => updateTechValue(name, e.target.value)}
+            onChange={(e) => updateTechValue(idx, e.target.value)}
           />
-          <input type="button" value="remove" onClick={(e) => removeTechRow(name)}/>
+          <input type="button" value="remove" onClick={(e) => removeTechRow(idx)}/>
         </div>
       );
     });
@@ -84,7 +89,7 @@ export function ItemEditor(props: ItemEditorProps) {
     <div className="table">
       {techTableRows}
       <div className="table-row">
-        <button>Add Technical Info</button>
+        <button onClick={addTechRow}>Add Technical Info</button>
       </div>
     </div>;
   const image = props.img_path === "" ?
