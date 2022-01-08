@@ -32,22 +32,48 @@ export function ItemEditor(props: ItemEditorProps) {
     event.preventDefault();
   }
 
-  function updateTech(name: string, value: string) {
-      const newTech = {...props.tech, name: name, value: value}
-      setTech(newTech);
+  function updateTechName(oldName: string, newName: string) {
+    const newTech = tech.map(({name, value}) => {
+      if (name === oldName) {
+        return {name: newName, value: value};
+      } else {
+        return {name: name, value: value};
+      }
+    })
+    setTech(newTech);
+  };
+
+  function updateTechValue(checkName: string, newValue: string) {
+    const newTech = tech.map(({name, value}) => {
+      if (name === checkName) {
+        return {name: name, value: newValue};
+      } else {
+        return {name: name, value: value};
+      }
+    })
+    setTech(newTech);
   };
 
   const techTableRows = tech === undefined ?
     <></> :
-    props.tech.map(({name, value}) => {
+    tech.map(({name, value}, idx) => {
       return (
-        <div className="table-row">
-          <label className="table-label">{name}</label>
+        <div className="table-row" key={idx}>
+          <input
+            type="text"
+            className="table-input"
+            value={name}
+            required={true}
+            placeholder="name"
+            onChange={(e) => updateTechName(name, e.target.value)}
+          />
           <input
             type="text"
             className="table-input"
             value={value}
-            onChange={(e) => updateTech(name, e.target.value)}
+            required={true}
+            placeholder="value"
+            onChange={(e) => updateTechValue(name, e.target.value)}
           />
         </div>
       );
@@ -68,7 +94,7 @@ export function ItemEditor(props: ItemEditorProps) {
     </div> :
     <>
       <div className="table-row">
-        <img src={props.img_path} alt={props.img_alt}></img>
+        <img src={props.img_path} alt={img_alt}></img>
       </div>
       <div className="table-row">
         <label className="table-label">Image Description</label>
