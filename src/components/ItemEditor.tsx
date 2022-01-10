@@ -70,11 +70,11 @@ export function ItemEditor(props: ItemEditorProps) {
         .then((response) => {
           const url = response.body;
           const formData = new FormData();
-          formData.append('file', image_file);
+          formData.append(image_file.name, image_file);
           const request = {
             method: "POST",
             headers: {
-              'Content-Type': 'multiport/form-data'
+              'Content-Type': 'multipart/form-data'
             },
             body: formData
           }
@@ -82,6 +82,9 @@ export function ItemEditor(props: ItemEditorProps) {
           console.log(`request = ${JSON.stringify(request)}`)
           fetch(url, request)
           .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response not OK');
+              }
             console.log(`response = ${JSON.stringify(response)}`);
             return response.json();
           })
