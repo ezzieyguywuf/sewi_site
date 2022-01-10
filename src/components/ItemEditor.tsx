@@ -59,6 +59,38 @@ export function ItemEditor(props: ItemEditorProps) {
     setCachedProps({...cachedProps, tech: newTech});
   }
 
+  function updateImage(files: FileList | null) {
+    if (files === null || files.length === 0) {
+      return;
+    } else {
+      const image_file = files[0];
+      console.log(`filename = ${image_file.name}`)
+      fetch(`https://rznkssur86.execute-api.us-east-1.amazonaws.com/test/getpresignedurl?filename=${image_file.name}`)
+        .then(response => response.json())
+        .then((response) => {
+          const url = response.body;
+          const formData = new FormData();
+          formData.append('file', image_file);
+          const request = {
+            method: "POST",
+            headers: {
+              'Content-Type': 'multiport/form-data'
+            },
+            body: formData
+          }
+          console.log(`url = ${url}`)
+          console.log(`request = ${JSON.stringify(request)}`)
+          fetch(url, request)
+          .then(response => {
+            console.log(`response = ${JSON.stringify(response)}`);
+            return response.json();
+          })
+          .then(result => console.log(`success: ${result}`))
+          .catch(error => console.log(`error: ${error}`));
+      })
+    }
+  }
+
   const techTableRows = cachedProps.tech === undefined ?
     <></> :
     cachedProps.tech.map(({name, value}, idx) => {
@@ -100,7 +132,7 @@ export function ItemEditor(props: ItemEditorProps) {
     </div> :
     <>
       <div className="table-row">
-        <img src={props.img_path} alt={cachedProps.img_alt}></img>
+        <img src={cachedProps.img_path} alt={cachedProps.img_alt}></img>
       </div>
       <div className="table-row">
         <label className="table-label">Image Description</label>
@@ -113,7 +145,7 @@ export function ItemEditor(props: ItemEditorProps) {
         />
       </div>
       <div className="table-row">
-        <input type="file" accept="image/*" />
+        <input type="file" accept="image/*" onChange={(e) => updateImage(e.target.files)}/>
       </div>
     </>;
 
