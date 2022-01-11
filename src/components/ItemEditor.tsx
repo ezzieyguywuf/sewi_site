@@ -64,33 +64,30 @@ export function ItemEditor(props: ItemEditorProps) {
       return;
     } else {
       const image_file = files[0];
+      const url = `https://rznkssur86.execute-api.us-east-1.amazonaws.com/test/sewi/${image_file.name}`
+      const request: RequestInit = {
+        method: 'PUT',
+        mode: 'cors',
+        credentials: 'omit',
+        headers: {
+          'Content-Type': image_file.type
+        },
+        body: image_file
+      }
       console.log(`filename = ${image_file.name}`)
-      fetch(`https://rznkssur86.execute-api.us-east-1.amazonaws.com/test/getpresignedurl?filename=${image_file.name}`)
-        .then(response => response.json())
-        .then((response) => {
-          const url = response.body;
-          const formData = new FormData();
-          formData.append(image_file.name, image_file);
-          const request = {
-            method: "POST",
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            },
-            body: formData
-          }
-          console.log(`url = ${url}`)
-          console.log(`request = ${JSON.stringify(request)}`)
-          fetch(url, request)
-          .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response not OK');
-              }
-            console.log(`response = ${JSON.stringify(response)}`);
-            return response.json();
-          })
-          .then(result => console.log(`success: ${result}`))
-          .catch(error => console.log(`error: ${error}`));
+      console.log(`request = ${JSON.stringify(request)}`)
+      fetch(url, request)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Network response not OK. ${response}`);
+        } else {
+          return response.json();
+        }
       })
+      .then((result) => {
+            console.log(`success = ${result}`);
+      })
+      .catch(error => console.log(`error: ${error}`));
     }
   }
 
